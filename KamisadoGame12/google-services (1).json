@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "273652077216",
+    "project_id": "kamisadogame-28a02",
+    "storage_bucket": "kamisadogame-28a02.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273652077216:android:fdfe690b09e68325c76fc5",
+        "android_client_info": {
+          "package_name": "com.companyname.kamisadogame12"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd2MprVXjnC0eHvN5NiuHhhWmOOe1zrDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="#393E46"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:text="Profile"
+        android:textSize="100px"
+        android:textColor="#EEEEEE"
+        android:gravity="center"
+        android:textFontWeight="1500"
+        android:layout_marginBottom="0.0dp"
+        android:layout_marginTop="0.0dp" 
+    />
+
+    <EditText
+        android:layout_width="700px"
+        android:layout_height="200px"
+        android:id="@+id/profileNameEt"
+        android:textSize="70px"
+         android:background="@android:color/holo_blue_dark"
+        android:textColor="#EEEEEE"
+        android:hint="Name"
+        android:paddingLeft="50px"
+        android:layout_marginTop="25px"
+        android:layout_marginBottom="25px"
+        android:textColorHint="#EEEEEE"
+    />
+
+    <EditText
+        android:layout_width="700px"
+        android:layout_height="200px"
+        android:id="@+id/profileScoreEt"
+        android:textSize="70px"
+         android:background="@android:color/holo_blue_dark"
+        android:textColor="#EEEEEE"
+        android:hint="Score"
+        android:paddingLeft="50px"
+        
+        android:layout_marginTop="10px"
+        android:textColorHint="#EEEEEE"
+    />
+
+    <androidx.appcompat.widget.AppCompatButton
+     android:layout_width="600px"
+     android:layout_height="200px"
+      android:background="@android:color/holo_blue_dark"
+     android:layout_marginTop="100px"
+     android:text="Update"
+     android:shadowColor="@android:color/black"
+     android:textSize="74px"
+     android:textFontWeight="1500"
+     android:id="@+id/profileUpdateBtn"
+     android:textColor="#F3EEEA"
+    />
+    
+   
+</LinearLayout>
+
