@@ -52,6 +52,7 @@ namespace KamisadoGame12.Activities
 
         private async void RegisterPageSubmitButton_Click(object sender, EventArgs e)
         {
+
             if(await Register(RegisterPageUsernameEditText.Text, RegisterPageEmailEditText.Text, RegisterPagePasswordEditText.Text))
             {
                 Toast.MakeText(this, "Registered successfully", ToastLength.Short).Show();
