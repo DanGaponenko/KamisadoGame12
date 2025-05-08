@@ -47,9 +47,12 @@ namespace KamisadoGame12
 
         private void BtnMainList_Click(object sender, EventArgs e)
         {
-            Intent intent = new Intent(this, typeof(ListPlayerActivity));
+            //Intent intent = new Intent(this, typeof(ListPlayerActivity));
+            Intent intent = new Intent(this, typeof(GameActivity));
             StartActivity (intent);
         }
+
+
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

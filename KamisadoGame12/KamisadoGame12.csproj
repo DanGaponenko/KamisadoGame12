@@ -60,6 +60,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\GameActivity.cs" />
     <Compile Include="Activities\ListPlayerActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\PlayerProfileActivity.cs" />
@@ -142,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\drawable\mainbackground.jpg" />
+    <AndroidResource Include="Resources\layout\GameLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
