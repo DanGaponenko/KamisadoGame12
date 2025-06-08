@@ -65,6 +65,10 @@
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\PlayerProfileActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
+    <Compile Include="HelperGame\Board.cs" />
+    <Compile Include="HelperGame\Game.cs" />
+    <Compile Include="HelperGame\Soldier.cs" />
+    <Compile Include="HelperGame\Square.cs" />
     <Compile Include="Helpers\FbData.cs" />
     <Compile Include="Helpers\General.cs" />
     <Compile Include="Helpers\PlayerAdapter.cs" />

@@ -14,16 +14,20 @@ using Android.Hardware.Lights;
 //using AppLiorProject.Model;
 using static Android.Content.ClipData;
 using KamisadoGame12.Helpers;
+using AndroidX.AppCompat.View.Menu;
 
 namespace KamisadoGame12.Activities
 {
     [Activity(Label = "GameActivity")]
     public class GameActivity : Activity, View.IOnClickListener
     {
-        //MasterBoard board;
+        Color[,] bgcolors;
+        Color[] clarr;
+        string[] colors;
+        Board board;
         LinearLayout Llmain;
         Button[,] btnGame;
-        //GameLogic game;
+        Game game;
         //Arr[,] d = new Arr[3, 3];
         LinearLayout.LayoutParams lp;
         LinearLayout llrow;
@@ -47,7 +51,7 @@ namespace KamisadoGame12.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.GameLayout);
             //InitObject();
-            //InitGame();
+            InitGame();
             InitViews();
         }
         private void InitViews()
@@ -74,6 +78,7 @@ namespace KamisadoGame12.Activities
                 for (int j = 0; j < 8; j++)
                 {
                     btnGame[i, j] = new Button(this);
+                    //btnGame[i, j].SetBackgroundColor(Color.White);
                     btnGame[i, j].SetWidth(3);
                     btnGame[i, j].SetHeight(3);
                     btnGame[i, j].LayoutParameters = lp1;
@@ -82,11 +87,13 @@ namespace KamisadoGame12.Activities
                     //int pos = HelperGame.FindPostion(i * 10 + j, d);
                     //st = pos.ToString() + st;
                     btnGame[i, j].Text = (st);
+                    Color c=bgcolors[i,j];
+                    btnGame[i, j].SetBackgroundColor(c);
                     //btnGame[i, j].SetBackgroundResource
                     //(Resource.Drawable.BackviewUnoCard);
-                    btnGame[i, j].SetTextColor(Color.Red);
+                    btnGame[i, j].SetTextColor(Color.Black);
                     btnGame[i, j].TextSize = 10;
-                    //btnGame[i, j].SetOnClickListener(this);
+                    btnGame[i, j].SetOnClickListener(this);
                     llrow.AddView(btnGame[i, j]);
                 }
                 Llmain.AddView(llrow);
@@ -95,14 +102,74 @@ namespace KamisadoGame12.Activities
             //ToastLength.Long).Show();
             tvDisplay.Text = "enjoy your game";
         }
-        //private void InitGame()
-        //{
-        //    board = new MasterBoard();
-        //    board.InitMasterBoard();
-        //    board.DoSomething();
-        //    //Console.WriteLine(board.PostionAvailable());
-        //    //tvDisplay.Text=board.Result.PrintBoard();
-        //}
+        private void InitGame()
+        {
+            game = new Game();
+            board = new Board();
+            board.InitBoard();
+            bgcolors = new Color[8,8];
+            //board.DoSomething();
+            //Console.WriteLine(board.PostionAvailable());
+            //tvDisplay.Text=board.Result.PrintBoard();
+            clarr = new Color[8];
+            colors = new string[8];
+            SetColors (clarr);
+        }
+
+        private void SetColors(Color[] clarr)
+        {
+            //clarr[0] = Color.Orange;
+            //clarr[1] = Color.MediumBlue;
+            //clarr[2] = Color.Violet; //purple
+            //clarr[3] = Color.LightPink;  //pink
+            //clarr[4] = Color.LightYellow;  //yellow
+            //clarr[5] = Color.IndianRed;  //red
+            //clarr[6] = Color.ForestGreen;  //green
+            //clarr[7] = Color.SaddleBrown;  //brown
+
+
+            clarr[0] = new Color(199, 104, 32); //orange
+            clarr[1] = new Color(66, 136, 201);  //blue
+            clarr[2] = new Color(92, 37, 107); //purple
+            clarr[3] = new Color(194, 107, 168);  //pink
+            clarr[4] = new Color(212, 196, 30);  //yellow
+            clarr[5] = new Color(219, 61, 61);  //red
+            clarr[6] = new Color(73, 125, 67);  //green
+            clarr[7] = new Color(74, 40, 15);  //brown
+
+            Toast.MakeText(this, board.ColorBoard[2, 3].Color, ToastLength.Short).Show();
+            colors[0] = "orange";
+            colors[1] = "blue";
+            colors[2] = "purple";
+            colors[3] = "pink";
+            colors[4] = "yellow";
+            colors[5] = "red";
+            colors[6] = "green";
+            colors[7] = "brown";
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    string clr = board.ColorBoard[i, j].Color;
+                    int x = FindColor(clr);
+                    bgcolors[i, j] = clarr[x];
+
+                  //  bgcolors[i, j] = Color.Red;
+
+                }
+            }
+        }
+
+        private int FindColor(string clr)
+        {
+            for(int i = 0;i < 8; i++)
+            {
+                if (clr == colors[i]) return i;
+            }
+            return 0;
+        }        
+
         //private void InitObject()
         //{
         //    HelperGame.GetExactPostion(d);
@@ -129,7 +196,7 @@ namespace KamisadoGame12.Activities
             int position = int.Parse(b.Text);
             int left = position / 100;// המיקום היחסי הכללי כיאילו
             int right = position % 100;//זה המיקום האמיתי
-            //int rt = HelperGame.FindPostion(right, d);
+           //int rt = HelperGame.FindPostion(right, d);
 
             if (counter == 0)
             {
