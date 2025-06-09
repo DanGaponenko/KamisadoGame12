@@ -14,13 +14,14 @@ namespace KamisadoGame12
         public Board GBoard { get; set; }
         public Soldier[] BlackSoldier { get; set; }//חיילים שחורים
         public Soldier[] WhiteSoldier { get; set; }//חיילים לבנים
-
+        public string message { get; set; }
 
         public Game()//איתחולים
         {
             GBoard = new Board();
             BlackSoldier = new Soldier[8];
             WhiteSoldier = new Soldier[8];
+            message = string.Empty;
         }
 
         public void InitGame()
@@ -88,7 +89,7 @@ namespace KamisadoGame12
                     }
                     else//שגיאה
                     {
-
+                        message = "the turn is ilegal";
                     }
                 }
                 
@@ -102,7 +103,7 @@ namespace KamisadoGame12
                 }
                 else//שגיאה
                 {
-                    
+                    message = "the turn is ilegal";
                 }
             }
             return "idk";
@@ -118,8 +119,8 @@ namespace KamisadoGame12
             lastcolor = GBoard.ColorBoard[x, y].Color;
             GBoard.ColorBoard[x, y].IsOccupied = true;
             turn = !turn;
-            Console.WriteLine(sldr);
-            Console.WriteLine(lastcolor);
+            //Console.WriteLine(sldr);
+            //Console.WriteLine(lastcolor);
         }
         //public int SoldierPosition(Soldier sldr)
         //{

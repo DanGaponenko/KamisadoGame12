@@ -21,6 +21,10 @@ namespace KamisadoGame12.Activities
     [Activity(Label = "GameActivity")]
     public class GameActivity : Activity, View.IOnClickListener
     {
+        string basesoldiercolor;
+        string soldiercolor;
+        Soldier current = new Soldier();
+        string sl;//soldier color
         Color[,] bgcolors;
         Color[] clarr;
         string[] colors;
@@ -34,8 +38,9 @@ namespace KamisadoGame12.Activities
         TextView tvDisplay;
         Button btnReset;
         int gameSize;
+        int counterClick = 0;
         int counter = 0;
-        int position;
+        int position =0;
         //string cardcolor;
         int index = 0;
         string uid;
@@ -78,20 +83,30 @@ namespace KamisadoGame12.Activities
                 for (int j = 0; j < 8; j++)
                 {
                     btnGame[i, j] = new Button(this);
-                    //btnGame[i, j].SetBackgroundColor(Color.White);
                     btnGame[i, j].SetWidth(3);
                     btnGame[i, j].SetHeight(3);
                     btnGame[i, j].LayoutParameters = lp1;
                     btnGame[i, j].Tag = (string.Empty + i) + j;
                     string st = btnGame[i, j].Tag.ToString();
-                    //int pos = HelperGame.FindPostion(i * 10 + j, d);
-                    //st = pos.ToString() + st;
+                    position = i * 10 + j;
                     btnGame[i, j].Text = (st);
                     Color c=bgcolors[i,j];
                     btnGame[i, j].SetBackgroundColor(c);
-                    //btnGame[i, j].SetBackgroundResource
-                    //(Resource.Drawable.BackviewUnoCard);
                     btnGame[i, j].SetTextColor(Color.Black);
+                    if (i == 0)
+                    {
+                        current = game.BlackSoldier[j];
+                        st = (game.BlackSoldier[j].Color);
+                        btnGame[i, j].Text = (st);
+                        btnGame[i,j].SetTextColor(Color.Black);
+                    }
+                    if (i == 7)
+                    {
+                        current = game.WhiteSoldier[j];
+                        st = (game.WhiteSoldier[j].Color);
+                        btnGame[i, j].Text = (st);
+                        btnGame[i, j].SetTextColor(Color.White);
+                    }
                     btnGame[i, j].TextSize = 10;
                     btnGame[i, j].SetOnClickListener(this);
                     llrow.AddView(btnGame[i, j]);
@@ -106,6 +121,7 @@ namespace KamisadoGame12.Activities
         {
             game = new Game();
             board = new Board();
+            game.InitGame();
             board.InitBoard();
             bgcolors = new Color[8,8];
             //board.DoSomething();
@@ -114,20 +130,13 @@ namespace KamisadoGame12.Activities
             clarr = new Color[8];
             colors = new string[8];
             SetColors (clarr);
+            
         }
+
+       
 
         private void SetColors(Color[] clarr)
         {
-            //clarr[0] = Color.Orange;
-            //clarr[1] = Color.MediumBlue;
-            //clarr[2] = Color.Violet; //purple
-            //clarr[3] = Color.LightPink;  //pink
-            //clarr[4] = Color.LightYellow;  //yellow
-            //clarr[5] = Color.IndianRed;  //red
-            //clarr[6] = Color.ForestGreen;  //green
-            //clarr[7] = Color.SaddleBrown;  //brown
-
-
             clarr[0] = new Color(199, 104, 32); //orange
             clarr[1] = new Color(66, 136, 201);  //blue
             clarr[2] = new Color(92, 37, 107); //purple
@@ -190,54 +199,62 @@ namespace KamisadoGame12.Activities
         //    }
         //}
         public void OnClick(View v)
-        {
-
+        { 
+            counterClick ++;
             Button b = (Button)v;
-            int position = int.Parse(b.Text);
-            int left = position / 100;// המיקום היחסי הכללי כיאילו
-            int right = position % 100;//זה המיקום האמיתי
-           //int rt = HelperGame.FindPostion(right, d);
-
-            if (counter == 0)
+            position = int.Parse(b.Tag.ToString());
+            if (counterClick % 2 != 0)
             {
-                //right2 = HelperGame.Try1(right);//זה המקום הבא שמותר לי ללחוץ בו right 2
-                                                //board.SetValueInPostion(left, rt);
-                //board.SetValueInPostion(left, right2, counter);
-                //PutImage(counter, b);
-                counter++;
-                //right2 = HelperGame.Try1(right);//זה המקום הבא שמותר לי ללחוץ בו right 2
-                //legalright = HelperGame.Try1(right);
+                Button firstbtn = b;
             }
             else
             {
-                //right2 = HelperGame.Try1(right);
-                //board.DoSomething();
-                //Toast.MakeText(this, board.Result.PrintBoard(), ToastLength.Short).Show();
-                //if (board.Result.Checkall() == false)//כל עוד המשחק נמשך 
-                //{
+                Toast.MakeText(this, current.Color + " " + current.BaseColor, ToastLength.Short).Show();
+                game.Step(position, current);
+            }
+            //int rt = HelperGame.FindPostion(right, d);
+            //Toast.MakeText(this, b.Tag + "", ToastLength.Short).Show();
+            //Toast.MakeText(this, position + "", ToastLength.Short).Show();
+            //if (counter == 0)
+            //{
+            //    //right2 = HelperGame.Try1(right);//זה המקום הבא שמותר לי ללחוץ בו right 2
+            //                                    //board.SetValueInPostion(left, rt);
+            //    //board.SetValueInPostion(left, right2, counter);
+            //    //PutImage(counter, b);
+            //    counter++;
+            //    //right2 = HelperGame.Try1(right);//זה המקום הבא שמותר לי ללחוץ בו right 2
+            //    //legalright = HelperGame.Try1(right);
+            //}
+            //else
+            //{
+            //    //right2 = HelperGame.Try1(right);
+            //    //board.DoSomething();
+            //    //Toast.MakeText(this, board.Result.PrintBoard(), ToastLength.Short).Show();
+            //    //if (board.Result.Checkall() == false)//כל עוד המשחק נמשך 
+            //    //{
 
-                //    //if (/*board.LegalPosition(right) && */HelperGame.IsExistInD(d, legalright, right))
-                //    //if (right2 == left)
-                //    {
+            //    //    //if (/*board.LegalPosition(right) && */HelperGame.IsExistInD(d, legalright, right))
+            //    //    //if (right2 == left)
+            //    //    {
 
-                //        board.SetValueInPostion(left, right2, counter);
-                //        //PutImage(counter, b);
+            //    //        board.SetValueInPostion(left, right2, counter);
+            //    //        //PutImage(counter, b);
 
-                //        counter++;
-                //        //legalright = HelperGame.Try1(right);
-                //        Toast.MakeText(this, counter.ToString(), ToastLength.Short).Show();
-                //    }
+            //    //        counter++;
+            //    //        //legalright = HelperGame.Try1(right);
+            //    //        Toast.MakeText(this, counter.ToString(), ToastLength.Short).Show();
+            //    //    }
     
 
-                //}
-                //else
-                //{
-                //    tvDisplay.Text = board.Result.GetWinner().ToString();
-                //    UpdateScore();
-                //}
+            //    //}
+            //    //else
+            //    //{
+            //    //    tvDisplay.Text = board.Result.GetWinner().ToString();
+            //    //    UpdateScore();
+            //    //}
                 
 
-            }
+            //}
             
 
         }
